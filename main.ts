@@ -168,14 +168,14 @@ export default class VimrcPlugin extends Plugin {
 			this.currentVimStatus = vimStatus.normal;
 			if (this.settings.displayVimMode)
 				this.updateVimStatusBar();
-			cmEditor.off('vim-mode-change', this.logVimModeChange);
-			cmEditor.on('vim-mode-change', this.logVimModeChange);
+			CodeMirror.off(cmEditor, 'vim-mode-change', this.logVimModeChange);
+			CodeMirror.on(cmEditor, 'vim-mode-change', this.logVimModeChange);
 
 			this.currentKeyChord = [];
-			cmEditor.off('vim-keypress', this.onVimKeypress);
-			cmEditor.on('vim-keypress', this.onVimKeypress);
-			cmEditor.off('vim-command-done', this.onVimCommandDone);
-			cmEditor.on('vim-command-done', this.onVimCommandDone);
+			CodeMirror.off(cmEditor, 'vim-keypress', this.onVimKeypress);
+			CodeMirror.on(cmEditor, 'vim-keypress', this.onVimKeypress);
+			CodeMirror.off(cmEditor, 'vim-command-done', this.onVimCommandDone);
+			CodeMirror.on(cmEditor, 'vim-command-done', this.onVimCommandDone);
 			CodeMirror.off(cmEditor.getInputField(), 'keydown', this.onKeydown);
 			CodeMirror.on(cmEditor.getInputField(), 'keydown', this.onKeydown);
 		}
@@ -276,8 +276,8 @@ export default class VimrcPlugin extends Plugin {
 			}
 
 			if (cmEditor) {
-				cmEditor.off('vim-mode-change', this.logVimModeChange);
-				cmEditor.on('vim-mode-change', this.logVimModeChange);
+				CodeMirror.off(cmEditor, 'vim-mode-change', this.logVimModeChange);
+				CodeMirror.on(cmEditor, 'vim-mode-change', this.logVimModeChange);
 				CodeMirror.off(cmEditor.getInputField(), 'keydown', this.onKeydown);
 				CodeMirror.on(cmEditor.getInputField(), 'keydown', this.onKeydown);
 			}
@@ -556,10 +556,10 @@ export default class VimrcPlugin extends Plugin {
 
 			let cmEditor = this.getCodeMirror(this.getActiveView());
 			// See https://codemirror.net/doc/manual.html#vimapi_events for events.
-			cmEditor.off('vim-keypress', this.onVimKeypress);
-			cmEditor.on('vim-keypress', this.onVimKeypress);
-			cmEditor.off('vim-command-done', this.onVimCommandDone);
-			cmEditor.on('vim-command-done', this.onVimCommandDone);
+			CodeMirror.off(cmEditor, 'vim-keypress', this.onVimKeypress);
+			CodeMirror.on(cmEditor, 'vim-keypress', this.onVimKeypress);
+			CodeMirror.off(cmEditor, 'vim-command-done', this.onVimCommandDone);
+			CodeMirror.on(cmEditor, 'vim-command-done', this.onVimCommandDone);
 		}
 	}
 
